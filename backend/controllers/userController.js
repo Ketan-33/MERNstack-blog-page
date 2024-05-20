@@ -11,17 +11,16 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     !password ||
     !phone ||
     !role ||
-    !education ||
-    !avatar
+    !education
   ) {
     return next(new ErrorHandler("Please fill full details!", 400));
   }
-  let user = await User.findOne({ email });
+  const user = await User.findOne({ email });
   if (user) {
-    return next(new ErrorHandler("User already existes", 400));
+    return next(new ErrorHandler("User already exists", 400));
   }
 
-  user = await User.create({
+  await User.create({
     name,
     email,
     password,

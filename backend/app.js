@@ -19,15 +19,15 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extented:true}));
 
-// app.use("/api/v1",userRouter);
+app.use("/api/v1",userRouter);
 dbConnection();
 
-app.get("/error", (req, res, next) => {
-  next(new ErrorHandler("This is a custom error", 400));
-});
-app.use((req, res, next) => {
-  next(new ErrorHandler("Not Found", 404));
-});
+// app.get("/error", (req, res, next) => {
+//   next(new ErrorHandler("This is a custom error", 400));
+// });
+// app.use((req, res, next) => {
+//   next(new ErrorHandler("Not Found", 404));
+// });
 app.use(errorMiddleware);
 
 export default app;
