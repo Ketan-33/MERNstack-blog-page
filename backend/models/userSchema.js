@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: [8, "Password must contain at least 8 character!"],
     maxLength: [32, "Password cannot exceed 32 character!"],
+    select : false,
   },
   createdOn: {
     type: Date,
@@ -53,6 +54,10 @@ userSchema.pre("save",async function(){
     next()
   }
   this.password = await bcrypt.hash(this.password,10)
-})
+});
+
+userSchema.methods.comparePassword=async()=>{
+  return await bcrypt.compare(enteredPassword,this.password)
+}
 
 export const User = mongoose.model("User", userSchema);
