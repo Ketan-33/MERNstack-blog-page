@@ -2,16 +2,45 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { sendToken } from "../utils/jwtToken.js";
+import cloudinary from "cloudinary";
+
 
 export const register = catchAsyncErrors(async (req, res, next) => {
+
+  if(!req.files || Object.keys(req.files).length===0){
+    return next(new ErrorHandler("User Avatar Required !",400))
+  }
+  const {avatar}= req.files;
+   const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
+
+   if (
+     !allowedFormats.includes(mainImage.mimetype) ) {
+     return next(
+       new ErrorHandler(
+         "Invalid file type. Only JPG, PNG and WEBP Formats Are Allowed!",
+         400
+       )
+     );
+   }
+
   const { name, email, password, phone, role, education } = req.body;
-  if (!name || !email || !password || !phone || !role || !education) {
+  if (!name || !email || !password || !phone || !role || !education || !avatar) {
     return next(new ErrorHandler("Please fill full details!", 400));
   }
   let user = await User.findOne({ email });
   if (user) {
     return next(new ErrorHandler("User already exists", 400));
   }
+
+    const cloudinaryResponse = await cloudinary.uploader.upload(
+      avatar.tempFilePath
+    );
+    if (!cloudinaryResponse || cloudinaryResponse.error) {
+      console.error(
+        "Cloudinary error:",
+        cloudinaryResponse.error || "Unknown cloudinary error!"
+      );
+    }
 
   user = await User.create({
     name,
@@ -20,6 +49,10 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     phone,
     role,
     education,
+    avatar: {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
+    },
   });
 
   sendToken(user, 200, "User Registered Successfully :)", res);
