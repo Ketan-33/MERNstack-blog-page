@@ -133,5 +133,32 @@ if (
    });
  });
 
+export const getAllBlogs = catchAsyncErrors(async (req, res, next) => {
+  const allBlogs = await Blog.find({ published: true });
+  res.status(200).json({
+    success: true,
+    allBlogs,
+  });
+});
 
+export const getSingleBlog = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.params;
+  const blog = await Blog.findById(id);
+  if (!blog) {
+    return next(new ErrorHandler("Blog not found!", 404));
+  }
+  res.status(200).json({
+    success: true,
+    blog,
+  });
+});
+
+export const getMyBlogs = catchAsyncErrors(async (req, res, next) => {
+  const createdBy = req.user._id;
+  const blogs = await Blog.find({ createdBy });
+  res.status(200).json({
+    success: true,
+    blogs,
+  });
+});
 
