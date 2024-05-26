@@ -11,13 +11,13 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("User Avatar Required !",400))
   }
   const {avatar}= req.files;
-   const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
+   const allowedFormats = ["image/png", "image/jpeg", "image/webp","image/svg"];
 
    if (
      !allowedFormats.includes(mainImage.mimetype) ) {
      return next(
        new ErrorHandler(
-         "Invalid file type. Only JPG, PNG and WEBP Formats Are Allowed!",
+         "Invalid file type. Only JPG, PNG , SVG and WEBP Formats Are Allowed!",
          400
        )
      );
