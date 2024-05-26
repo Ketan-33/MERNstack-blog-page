@@ -76,4 +76,47 @@ if (
   );
 }
 
-})
+  const blogData = {
+    title,
+    intro,
+    paraOneDescription,
+    paraOneTitle,
+    paraTwoDescription,
+    paraTwoTitle,
+    paraThreeDescription,
+    paraThreeTitle,
+    category,
+    createdBy,
+    authorAvatar,
+    authorName,
+    mainImage: {
+      public_id: mainImageRes.public_id,
+      url: mainImageRes.secure_url,
+    },
+  };
+  if (paraOneImageRes) {
+    blogData.paraOneImage = {
+      public_id: paraOneImageRes.public_id,
+      url: paraOneImageRes.secure_url,
+    };
+  }
+  if (paraTwoImageRes) {
+    blogData.paraTwoImage = {
+      public_id: paraTwoImageRes.public_id,
+      url: paraTwoImageRes.secure_url,
+    };
+  }
+  if (paraThreeImageRes) {
+    blogData.paraThreeImage = {
+      public_id: paraThreeImageRes.public_id,
+      url: paraThreeImageRes.secure_url,
+    };
+  }
+  const blog = await Blog.create(blogData);
+  res.status(200).json({
+    success: true,
+    message: "Blog Uploaded!",
+    blog,
+  });
+});
+
