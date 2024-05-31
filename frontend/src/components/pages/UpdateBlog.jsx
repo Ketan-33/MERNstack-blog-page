@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function UpdateBlog() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const UpdateBlog = () => {
+  return <div>Update Blog Page</div>;
+};
 
-export default UpdateBlog
+export default UpdateBlog;
