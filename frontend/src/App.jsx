@@ -11,6 +11,7 @@ import Login from "./components/pages/Login";
 import AllAuthors from "./components/pages/AllAuthors";
 import UpdateBlog from "./components/pages/UpdateBlog";
 import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/blog/update/:id" element={<UpdateBlog />} />
         </Routes>
+        <Footer/>
       </Router>
     </>
   );
