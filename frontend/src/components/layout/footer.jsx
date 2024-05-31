@@ -71,7 +71,7 @@ const Footer = () => {
       </div>
       <div className="container">
         <div className="logo">
-          Aww <span>BLOG</span>
+          Aww <span>Blogs</span>
         </div>
         <div className="links">
           <Link
