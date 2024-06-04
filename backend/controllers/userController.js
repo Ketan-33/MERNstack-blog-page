@@ -6,25 +6,31 @@ import cloudinary from "cloudinary";
 
 
 export const register = catchAsyncErrors(async (req, res, next) => {
-
-  if(!req.files || Object.keys(req.files).length===0){
-    return next(new ErrorHandler("User Avatar Required !",400))
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return next(new ErrorHandler("User Avatar Required !", 400));
   }
-  const {avatar}= req.files;
-   const allowedFormats = ["image/png", "image/jpeg", "image/webp","image/svg"];
+  const { avatar } = req.files;
+  const allowedFormats = ["image/png", "image/jpeg", "image/webp", "image/svg"];
 
-   if (
-     !allowedFormats.includes(mainImage.mimetype) ) {
-     return next(
-       new ErrorHandler(
-         "Invalid file type. Only JPG, PNG , SVG and WEBP Formats Are Allowed!",
-         400
-       )
-     );
-   }
+  if (!allowedFormats.includes(avatar.mimetype)) {
+    return next(
+      new ErrorHandler(
+        "Invalid file type. Only JPG, PNG , SVG and WEBP Formats Are Allowed!",
+        400
+      )
+    );
+  }
 
   const { name, email, password, phone, role, education } = req.body;
-  if (!name || !email || !password || !phone || !role || !education || !avatar) {
+  if (
+    !name ||
+    !email ||
+    !password ||
+    !phone ||
+    !role ||
+    !education ||
+    !avatar
+  ) {
     return next(new ErrorHandler("Please fill full details!", 400));
   }
   let user = await User.findOne({ email });
@@ -32,15 +38,15 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("User already exists", 400));
   }
 
-    const cloudinaryResponse = await cloudinary.uploader.upload(
-      avatar.tempFilePath
+  const cloudinaryResponse = await cloudinary.uploader.upload(
+    avatar.tempFilePath
+  );
+  if (!cloudinaryResponse || cloudinaryResponse.error) {
+    console.error(
+      "Cloudinary error:",
+      cloudinaryResponse.error || "Unknown cloudinary error!"
     );
-    if (!cloudinaryResponse || cloudinaryResponse.error) {
-      console.error(
-        "Cloudinary error:",
-        cloudinaryResponse.error || "Unknown cloudinary error!"
-      );
-    }
+  }
 
   user = await User.create({
     name,
