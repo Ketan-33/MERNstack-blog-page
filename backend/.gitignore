@@ -29,3 +29,6 @@ yarn-error.log
 
 # generated files
 /public/build
+
+# Ignore the config.env file inside the config folder
+/config/config.env
