@@ -2,7 +2,7 @@ import React, { useContext} from "react";
 import LatestBlog from "../miniComponents/LatestBlog";
 import HeroSection from "../miniComponents/HeroSection";
 import TrendingBlogs from "../miniComponents/TrendingBlogs";
-import PopularAuthor from "../miniComponents/PopularAuthor";
+// import PopularAuthor from "../miniComponents/PopularAuthor";
 import { Context } from "../../main";
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
         <HeroSection />
         <TrendingBlogs />
         <LatestBlog heading={"Latest Blogs"} blogs={filteredBlogs} />
-        <PopularAuthor />
+        {/* <PopularAuthor /> */}
       </article>
     </>
   );
