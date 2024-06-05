@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { BeatLoader } from "react-spinners";
 
 const PopularAuthor = () => {
-  const [authors, setAuthors] = useState([]);
+  const [author, setAuthor] = useState([]);
   useEffect(() => {
     const fetchAuthors = async () => {
       const { data } = await axios.get(
-        "http://localhost:4000/api/v1/user/authors",
+        "http://localhost:4000/api/v1/user/author",
         { withCredentials: true }
       );
-      setAuthors(data.authors);
+      setAuthor(data.author);
     };
     fetchAuthors();
   }, []);
@@ -18,8 +18,8 @@ const PopularAuthor = () => {
     <section className="popularAuthors">
       <h3>Popular Authors</h3>
       <div className="container">
-        {authors && authors.length > 0 ? (
-          authors.slice(0, 4).map((element) => {
+        {author && author.length > 0 ? (
+          author.slice(0, 4).map((element) => {
             return (
               <div className="card" key={element._id}>
                 <img src={element.avatar.url} alt="author" />

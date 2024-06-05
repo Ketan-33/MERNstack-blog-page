@@ -140,6 +140,7 @@ const CreateBlog = () => {
             >
               <option value="">Select Blog Category</option>
               <option value="Lifestyle">Lifestyle</option>
+              <option value="Love">Love</option>
               <option value="Technology">Technology</option>
               <option value="Sports">Sports</option>
               <option value="Travel">Travel</option>

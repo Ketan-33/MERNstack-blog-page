@@ -51,6 +51,7 @@ const Footer = () => {
           <h3>Categories</h3>
           <ul>
             <li>Lifestyle</li>
+            <li>Love</li>
             <li>Technology</li>
             <li>Sports</li>
             <li>Travel</li>
