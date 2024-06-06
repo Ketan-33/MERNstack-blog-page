@@ -40,7 +40,7 @@ const seedDB = async () => {
     },
     {
       name: "Obito",
-      email: "Obito@example.com",
+      email: "obito@example.com",
       phone: 123456789,
       avatar: {
         public_id: "qeffukczafllbrv1iz6j",
@@ -51,12 +51,17 @@ const seedDB = async () => {
       password: "password123",
     },
   ];
+  
 
-  for (let user of users) {
-    user.password = await bcrypt.hash(user.password, 10);
-  }
+      const createdUsers = await Promise.all(
+        users.map(async (user) => {
+          user.password = await bcrypt.hash(user.password, 10);
+          return user;
+        })
+      );
 
-  const createdUsers = await User.insertMany(users);
+  
+  await User.insertMany(users);
 
   // Create sample blogs
   const blogs = [

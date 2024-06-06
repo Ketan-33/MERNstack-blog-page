@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start":"node server.js",
+    "seed" : "node seed.js",
     "dev":"nodemon server.js"
   },
   "author": "Ketan",
