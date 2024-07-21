@@ -53,4 +53,28 @@ This project is a blog platform where users can register, login, and create blog
 |     Author    |  obito@example.com  |      password123 |
 
 
+## Screenshots
+### Register Page
+![Register Page](screenshots/register.png)
 
+### Login Page
+![Login Page](/screenshots/login.png)
+
+### Home Page
+![Home Page](screenshots/home.png)
+![Home Page](screenshots/home1.png)
+
+### Blogs page
+![Blogs Page](screenshots/blogs.png)
+
+### Authors
+![Authors](screenshots/authors.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Chart
+![Chart](screenshots/chart.png)
+
+### Profile page
+![Profile Page](screenshots/profile.png)
