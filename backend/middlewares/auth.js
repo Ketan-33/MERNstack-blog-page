@@ -10,8 +10,8 @@ export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
-    console.log("Token not found in cookies");
-    return next(new ErrorHandler("User is not authenticated!", 400));
+    // console.log("Token not found in cookies");
+    return new ErrorHandler("User is not authenticated!", 400);
   }
 
   try {
